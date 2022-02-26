@@ -1,6 +1,6 @@
-# Projeto 1 - 2021/2
+# Trabalho 1 - 2021/2
 
-Projeto 1 da disciplina de Fundamentos de Sistemas Embarcados (2021/2)
+Trabalho 1 da disciplina de Fundamentos de Sistemas Embarcados (2021/2)
 
 ## 1. Objetivos
 
