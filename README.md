@@ -117,6 +117,8 @@ Para acessar as informações via UART envie mensagens em formato MODBUS com o s
 | **0x01** | **0x23** | **0xC2** N N N N |	Solicita Temperatura Potenciômetro	| 0x00 0x23 0xC2 + float (4 bytes) |
 | **0x01** | **0x16** | **0xD1** N N N N |	Envia sinal de controle Int (4 bytes) | - |
 | **0x01** | **0x16** | **0xD2** N N N N |	Lê comandos do usuário Int (1 byte) | 0x00 0x16 0xD2 + byte de comando | 
+| **0x01** | **0x16** | **0xD3** N N N N |	Envia Estado do Sistema (Ligado = 1 / Desligado = 0) (1 byte) | 0x00 0x16 0xD3 + byte de estado | 
+| **0x01** | **0x16** | **0xD4** N N N N |	Modo de Controle (Potenciômetro = 0 / Curva = 1) (1 byte) | 0x00 0x16 0xD4 + byte de modo de controle | 
 
 Obs: todas as mensagens devem ser enviadas com o CRC e também recebidas verificando o CRC. Caso esta verificação não seja válida, a mensagem deverá ser descartada e uma nova solicitação deverá ser realizada.
 
