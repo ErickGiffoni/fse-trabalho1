@@ -137,6 +137,12 @@ A leitura dos comandos via UART deve ser realizada a cada 200 ms.
 
 Para o uso do controle do PID, estão sendo sugeridos os seguintes valores para as constantes:
 
+Placa Rasp42 com Fonte de 12V:
+- **Kp** = 30.0
+- **Ki** = 0.2
+- **Kd** = 400.0
+- 
+Placa Rasp43 com Fonte de 5V:
 - **Kp** = 20.0
 - **Ki** = 0.1
 - **Kd** = 100.0
