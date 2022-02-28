@@ -15,7 +15,7 @@ No trabalho, o aluno deverá desenvolver o software que efetua o controle de tem
 Os comandos do usuário do sistema para definir a temperatura desejada serão controlados de três maneiras:
 1. Através de um Potenciômetro externo;
 2. Através de entrada de teclado no terminal;
-3. Seguindo uma curva de temperatura pré-definida em arquivo de configuração.
+3. Seguindo uma curva de temperatura pré-definida em arquivo de configuração ([Arquivo da Curva](./curva_reflow.csv)).
 
 O controle da temperatura será realizado através da estratégia PID onde deverão estar disponíveis para o usuário o ajuste dos parâmetros Kp, Ki e Kd nas configurações do sistema (Via terminal).
 
@@ -108,6 +108,11 @@ Para acessar as informações via UART envie mensagens em formato MODBUS com o s
 2. Leitura do Valor de Temperatura Interna (TI): Código 0x23, Sub-código: 0xC1 + 4 últimos dígitos da matrícula. O retorno será o valor em Float (4 bytes) da temperatura interna do sistema com o pacote no formato MODBUS;
 3. Leitura da temperatura de referência - TR (Potenciômetro): Código 0x23, Sub-código: 0xC2 + 4 últimos dígitos da matrícula. O retorno será o valor em Float (4 bytes) da temperatura de referência definida pelo usuário com o pacote no formato MODBUS;
 4. Envio do sinal de controle (Resistor / Ventoinha): Código 0x16,  Sub-código: 0xD1 + 4 últimos dígitos da matrícula, Valor em Int (4 bytes).
+5. Envio do sinal de referência nos casos em que o sistema esteja sendo controlado ou pelo terminal ou pela curva de referência: Código 0x16,  Sub-código: 0xD2 + 4 últimos dígitos da matrícula, Valor em Float (4 bytes).
+6. Leitura dos Comandos de usuário: Código 0x23,  Sub-código: 0xC3;
+7. Envio do estado interno do sistema em resposta aos comandos de usuário:
+   1. Estado (Ligado / Desligado): Código 0x16,  Sub-código: 0xD3 + byte;
+   2. Modo de Controle (Potenciômetro = 0 / Referência = 1): Código 0x16,  Sub-código: 0xD4 + byte;
 
 <p style="text-align: center;">Tabela 1 - Códigos do Protocolo de Comunicação</p>
 
@@ -115,10 +120,11 @@ Para acessar as informações via UART envie mensagens em formato MODBUS com o s
 |:-:|:-:|:-:|:--|:--|
 | **0x01** | **0x23** | **0xC1** N N N N |	Solicita Temperatura Interna  | 0x00 0x23 0xC1 + float (4 bytes) |
 | **0x01** | **0x23** | **0xC2** N N N N |	Solicita Temperatura Potenciômetro	| 0x00 0x23 0xC2 + float (4 bytes) |
-| **0x01** | **0x23** | **0xC3** N N N N |	Lê comandos do usuário  | 0x00 0x16 0xC3 + byte de comando | 
+| **0x01** | **0x23** | **0xC3** N N N N |	Lê comandos do usuário  | 0x00 0x23 0xC3 + int (4 bytes de comando) | 
 | **0x01** | **0x16** | **0xD1** N N N N |	Envia sinal de controle Int (4 bytes) | - |
-| **0x01** | **0x16** | **0xD3** N N N N |	Envia Estado do Sistema (Ligado = 1 / Desligado = 0) (1 byte) | 0x00 0x16 0xD3 + byte de estado | 
-| **0x01** | **0x16** | **0xD4** N N N N |	Modo de Controle (Potenciômetro = 0 / Curva = 1) (1 byte) | 0x00 0x16 0xD4 + byte de modo de controle | 
+| **0x01** | **0x16** | **0xD2** N N N N |	Envia sinal de Referência Float (4 bytes) | - |
+| **0x01** | **0x16** | **0xD3** N N N N |	Envia Estado do Sistema (Ligado = 1 / Desligado = 0) (1 byte) | 0x00 0x16 0xD3 + int (4 bytes de estado) | 
+| **0x01** | **0x16** | **0xD4** N N N N |	Modo de Controle (Potenciômetro = 0 / Curva = 1) (1 byte) | 0x00 0x16 0xD4 + int (4 bytes de modo de controle) | 
 
 Obs: todas as mensagens devem ser enviadas com o CRC e também recebidas verificando o CRC. Caso esta verificação não seja válida, a mensagem deverá ser descartada e uma nova solicitação deverá ser realizada.
 
@@ -131,7 +137,7 @@ Obs: todas as mensagens devem ser enviadas com o CRC e também recebidas verific
 | Aciona modo de controle via potenciômetro | 0x03 |
 | Aciona modo de controle via curva de temperatura | 0x04 |
 
-A leitura dos comandos via UART deve ser realizada a cada 200 ms.
+A leitura dos comandos via UART deve ser realizada a cada **1 s**.
 
 ## 8. Parâmetros de PID
 
