@@ -87,7 +87,7 @@ Os sistema de controle possui os seguintes requisitos:
    2. Acionado: mostrar o modo de controle (Terminal ou UART) juntamente com os valores das temperaturas (TI, TE, TR) atualizados a cada 1 segundo;
 8.  O programa deve tratar a interrupção do teclado (Ctrl + C = sinal **SIGINT**) encerrando todas as comunicações com periféricos (UART / I2C / GPIO) e desligar os atuadores (Resistor e Ventoinha);
 9.  O código deve possuir Makefile para compilação;
-10. O sistema deve conter em seu README as instruções de compilação e uso, bem como gráficos* com o resultado de dois experimentos, um com o controle On-Off e outro com o PID sendo executado pelo período de 10 minutos com variação da temperatura de referência sendo dada pelo potenciômetro.
+10. O sistema deve conter em seu README as instruções de compilação e uso, bem como gráficos* com o resultado de dois experimentos, um com o **Potenciômetro** como referência e outro executando a **Curva de Reflow**, ambos por um período de aproximadamente minutos.
  
 \* Serão necessários dois gráficos para cada experimento. Um deles plotando as temperaturas (Ambiente, Interna e Referência (Potenciômetro)) e outro gráfico com o valor do acionamento dos atuadores (Resistor / Ventoinha) em valor percentual entre -100% e 100%.
 
