@@ -10,7 +10,9 @@ Entre na pasta ```src``` e execute:
 
 # Uso
 
-...
+Após compilar, entre na pasta ```src``` e execute:
+
+```$ ./a.out```
 
 # Relatório
 
