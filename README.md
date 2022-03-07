@@ -2,6 +2,27 @@
 
 Trabalho 1 da disciplina de Fundamentos de Sistemas Embarcados (2021/2)
 
+# Compilação
+
+Entre na pasta ```src``` e execute:
+
+```$ source compila.sh```
+
+# Uso
+
+...
+
+# Relatório
+
+Estou passando mal há vários dias e por isso não consegui dar continuidade ao trabalho. Minha cabeça dói, além de estar resfriado e com sinusite. Durante todo o tempo tenho sofrido com pequenos desmaios involuntários que acontecem comigo ainda acordado. Fui ao hospital recentemente, passei o dia todo lá mas não descobrimos o que está errado, apenas descartamos algumas possibilidades. Estou aguardando o plano de saúde marcar meu neurologista e endocrinologista para realizar maiores investigações e configurar um tratamento para mim. Além disso estou passando por uma fase ruim, psicologicamente falando.
+
+Agradeço a compreensão, professor.
+
+<hr>
+<hr>
+
+# Sobre o trabalho
+
 ## 1. Objetivos
 
 Este trabalho tem por objetivo a implementação de um sistema (que simula) o controle de um forno para soldagem de placas de circuito impresso (PCBs). Abaixo vemos alguns exemplos de fornos comerciais para este propósito.
