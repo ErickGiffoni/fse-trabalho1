@@ -1,0 +1,1 @@
+gcc main.c uart/uart.c crc/crc16.c
